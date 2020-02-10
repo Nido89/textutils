@@ -20,6 +20,7 @@ from .import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('home/', views.home, name='home'),
     path('removepunc', views.removepunc, name='rempun'),
     path('capitalitfirst', views.capfirst, name='capfirst'),
     path('newlineremove', views.newlineremove, name='newlineremove'),
