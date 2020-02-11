@@ -23,6 +23,9 @@ def home(request):
      <a/>''')
 
 def removepunc(request):
+    #get the Text
+    djtext = request.GET.get('text', 'default')
+    print(djtext)
     return HttpResponse("remove punctuations")
 
 def capfirst(request):
