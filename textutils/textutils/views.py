@@ -22,25 +22,38 @@ def home(request):
                         </p>
      <a/>''')
 
-def removepunc(request):
+def analyze(request):
     #get the Text
     djtext = request.GET.get('text', 'default')
+    removepunc = request.GET.get('removepunc', 'off')
+    print(removepunc)
     print(djtext)
-    return HttpResponse("remove punctuations")
+    if removepunc == "on":
+    #analyzed = djtext
+        punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+        analyzed = ""
+        for char in djtext:
+            if char not in punctuations:
+                analyzed = analyzed + char
+        params= {'purpose': 'Remove Punctuations', 'analyzed_text': analyzed}
+        return render(request,'analyze.html', params)
+    else:
 
-def capfirst(request):
-    return HttpResponse("capitalize first letter")
+        return HttpResponse("Error")
 
-def newlineremove(request):
-    return HttpResponse("Remove new first line")
-
-def spaceremover(request):
-    return HttpResponse("Space Remover <a href='/'> Go Back <a/>")
-
-def charcount(request):
-    return HttpResponse("count characters")
-
-
-def about(request):
-    return HttpResponse("This is about Jalal in django python")
+# def capfirst(request):
+#     return HttpResponse("capitalize first letter")
+#
+# def newlineremove(request):
+#     return HttpResponse("Remove new first line")
+#
+# def spaceremover(request):
+#     return HttpResponse("Space Remover <a href='/'> Go Back <a/>")
+#
+# def charcount(request):
+#     return HttpResponse("count characters")
+#
+#
+# def about(request):
+#     return HttpResponse("This is about Jalal in django python")
 

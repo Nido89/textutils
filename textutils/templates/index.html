@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Template is Working</title>
+    <title>TextUtilityTool</title>
 </head>
 <body>
-<h1>Wekcone to my app to analyse text. Enter your text Below</h1>
-<form action='/removepunc' method='get'>
+<h1>Welcome to my app to analyse text. Enter your text Below</h1>
+<form action='/analyze' method='get'>
   <textarea name='text' style='margin: 0px; width: 792px; height: 204px;'></textarea>
+    <br>
+    <input type="checkbox" name="removepunc"> Remove Punctuations
+    <br>
     <button type='submit'>Analyze Text</button>
 
 
