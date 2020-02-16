@@ -25,9 +25,14 @@ def home(request):
 def analyze(request):
     #get the Text
     djtext = request.GET.get('text', 'default')
+    #check the values of checkboxes
     removepunc = request.GET.get('removepunc', 'off')
-    print(removepunc)
-    print(djtext)
+    fullcaps = request.GET.get('fullcaps', 'off')
+    newlineremover = request.GET.get('newlineremover', 'off')
+    extraspaceremover = request.GET.get('extraspaceremover', 'off')
+    # print(removepunc)
+    # print(djtext)
+    #Check which checkbox is on
     if removepunc == "on":
     #analyzed = djtext
         punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
@@ -36,7 +41,41 @@ def analyze(request):
             if char not in punctuations:
                 analyzed = analyzed + char
         params= {'purpose': 'Remove Punctuations', 'analyzed_text': analyzed}
+        #Analyze the Text for Punctuations in this case
         return render(request,'analyze.html', params)
+    elif(fullcaps=="on"):
+        analyzed=""
+        for char in djtext:
+            analyzed = analyzed + char.upper()
+        params = {'purpose': 'Changed to Upper Case', 'analyzed_text':
+    analyzed}
+            # Analyze the Text for Punctuations in this case
+        return render(request, 'analyze.html', params)
+
+    elif(newlineremover=="on"):
+        analyzed = ""
+        for char in djtext:
+            if char !="\n":
+                analyzed = analyzed + char
+        params = {'purpose': 'Removed New Lines', 'analyzed_text':
+            analyzed}
+        # Analyze the Text for Punctuations in this case
+        return render(request, 'analyze.html', params)
+
+
+    elif (extraspaceremover == "on"):
+        analyzed = ""
+        for index, char in enumerate(djtext):
+            if not(djtext[index] == " " and djtext[index +1]==" "):
+                analyzed = analyzed + char
+
+        params = {'purpose': 'Removed New Lines', 'analyzed_text':
+            analyzed}
+        # Analyze the Text for Punctuations in this case
+        return render(request, 'analyze.html', params)
+
+
+
     else:
 
         return HttpResponse("Error")
