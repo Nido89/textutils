@@ -30,6 +30,7 @@ def analyze(request):
     fullcaps = request.GET.get('fullcaps', 'off')
     newlineremover = request.GET.get('newlineremover', 'off')
     extraspaceremover = request.GET.get('extraspaceremover', 'off')
+    charactercounter = request.GET.get('charactercounter', 'off')
     # print(removepunc)
     # print(djtext)
     #Check which checkbox is on
@@ -70,6 +71,14 @@ def analyze(request):
                 analyzed = analyzed + char
 
         params = {'purpose': 'Removed New Lines', 'analyzed_text':
+            analyzed}
+        # Analyze the Text for Punctuations in this case
+        return render(request, 'analyze.html', params)
+
+
+    elif (charactercounter == "on"):
+        analyzed = len(djtext)
+        params = {'purpose': 'Number of Characters counted', 'analyzed_text':
             analyzed}
         # Analyze the Text for Punctuations in this case
         return render(request, 'analyze.html', params)
