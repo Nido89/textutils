@@ -4,9 +4,12 @@ from django.shortcuts import render
 def index(request):
     params = {'type': 'Hobby Projects', 'projects': 'coding websites'}
     return render(request,'index.html',params)
+def contact(request):
+    params = {'type': 'Hobby Projects', 'projects': 'coding websites'}
+    return render(request,'contact.html',params)
 
 def home(request):
-    return HttpResponse('''<h1>Home</h1><p><h2>This is Jalal's WEBSITE Portfolio from Django</h2>
+    return HttpResponse('''<h1>About Me</h1><p><h2>This is Jalal's WEBSITE Portfolio from Django</h2>
     <a href= "https://github.com/Nido89"> Link to My Github Portfolio</a>
      <p>
      <h3>This is Jalal's WEBSITE Portfolio from Django</h3>
@@ -41,7 +44,7 @@ def analyze(request):
         for char in djtext:
             if char not in punctuations:
                 analyzed = analyzed + char
-        params= {'purpose': 'Remove Punctuations', 'analyzed_text': analyzed}
+        params= {'purpose': 'Remove Punctuations with upper text', 'analyzed_text': analyzed}
         #Analyze the Text for Punctuations in this case
         return render(request,'analyze.html', params)
     elif(fullcaps=="on"):
