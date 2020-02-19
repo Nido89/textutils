@@ -27,13 +27,13 @@ def home(request):
 
 def analyze(request):
     #get the Text
-    djtext = request.GET.get('text', 'default')
+    djtext = request.POST.get('text', 'default')
     #check the values of checkboxes
-    removepunc = request.GET.get('removepunc', 'off')
-    fullcaps = request.GET.get('fullcaps', 'off')
-    newlineremover = request.GET.get('newlineremover', 'off')
-    extraspaceremover = request.GET.get('extraspaceremover', 'off')
-    charactercounter = request.GET.get('charactercounter', 'off')
+    removepunc = request.POST.get('removepunc', 'off')
+    fullcaps = request.POST.get('fullcaps', 'off')
+    newlineremover = request.POST.get('newlineremover', 'off')
+    extraspaceremover = request.POST.get('extraspaceremover', 'off')
+    charactercounter = request.POST.get('charactercounter', 'off')
     # print(removepunc)
     # print(djtext)
     #Check which checkbox is on
@@ -59,7 +59,7 @@ def analyze(request):
     elif(newlineremover=="on"):
         analyzed = ""
         for char in djtext:
-            if char !="\n":
+            if char !="\n" and char!="\r":
                 analyzed = analyzed + char
         params = {'purpose': 'Removed New Lines', 'analyzed_text':
             analyzed}
