@@ -44,19 +44,21 @@ def analyze(request):
         for char in djtext:
             if char not in punctuations:
                 analyzed = analyzed + char
-        params= {'purpose': 'Remove Punctuations with upper text', 'analyzed_text': analyzed}
+        params= {'purpose': 'Removed Punctuations', 'analyzed_text': analyzed}
+        djtext = analyzed
         #Analyze the Text for Punctuations in this case
-        return render(request,'analyze.html', params)
-    elif(fullcaps=="on"):
+        #return render(request,'analyze.html', params)
+    if(fullcaps=="on"):
         analyzed=""
         for char in djtext:
             analyzed = analyzed + char.upper()
         params = {'purpose': 'Changed to Upper Case', 'analyzed_text':
     analyzed}
             # Analyze the Text for Punctuations in this case
-        return render(request, 'analyze.html', params)
+        djtext = analyzed
+        #return render(request, 'analyze.html', params)
 
-    elif(newlineremover=="on"):
+    if(newlineremover=="on"):
         analyzed = ""
         for char in djtext:
             if char !="\n" and char!="\r":
@@ -64,10 +66,11 @@ def analyze(request):
         params = {'purpose': 'Removed New Lines', 'analyzed_text':
             analyzed}
         # Analyze the Text for Punctuations in this case
-        return render(request, 'analyze.html', params)
+        djtext = analyzed
+        #return render(request, 'analyze.html', params)
 
 
-    elif (extraspaceremover == "on"):
+    if (extraspaceremover == "on"):
         analyzed = ""
         for index, char in enumerate(djtext):
             if not(djtext[index] == " " and djtext[index +1]==" "):
@@ -76,35 +79,31 @@ def analyze(request):
         params = {'purpose': 'Removed New Lines', 'analyzed_text':
             analyzed}
         # Analyze the Text for Punctuations in this case
-        return render(request, 'analyze.html', params)
+        djtext = analyzed
+        #return render(request, 'analyze.html', params)
 
 
-    elif (charactercounter == "on"):
+    if (charactercounter == "on"):
         analyzed = len(djtext)
         params = {'purpose': 'Number of Characters counted', 'analyzed_text':
             analyzed}
         # Analyze the Text for Punctuations in this case
-        return render(request, 'analyze.html', params)
+        #djtext = analyzed
+        #return render(request, 'analyze.html', params)
+    if(removepunc!= "on" and newlineremover!= "on" and fullcaps!="on" and extraspaceremover!= "on" and charactercounter!= "on"):
+        return HttpResponse("Please select one option and Try Again")
 
-
-
-    else:
-
-        return HttpResponse("Error")
-
+    return render(request, 'analyze.html', params)
+    #else:
+    #
+    #     return HttpResponse("Error")
 # def capfirst(request):
 #     return HttpResponse("capitalize first letter")
-#
 # def newlineremove(request):
 #     return HttpResponse("Remove new first line")
-#
 # def spaceremover(request):
 #     return HttpResponse("Space Remover <a href='/'> Go Back <a/>")
-#
 # def charcount(request):
 #     return HttpResponse("count characters")
-#
-#
 # def about(request):
 #     return HttpResponse("This is about Jalal in django python")
-
